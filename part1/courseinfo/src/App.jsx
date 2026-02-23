@@ -28,8 +28,8 @@ const App = () => {
     }
 
     const Part = (props) => {
-        console.log(props.exercises)
-        console.log(props.part)
+        // console.log(props.exercises)
+        // console.log(props.part)
 
         return (
             <p>{props.part} {props.exercise}</p>

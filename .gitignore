@@ -37,5 +37,5 @@ dist-ssr
 /Conociendo/
 /public/
 part1/node_modules/
-part1/.vite
-part1/public/vite.svg
+part1/courseinfo/.vite
+part1/courseinfo/public/vite.svg
