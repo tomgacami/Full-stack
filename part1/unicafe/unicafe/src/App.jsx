@@ -24,16 +24,23 @@ const Statistics = ({feedbackCounter}) => {
     const positiveScore = totalFeeds === 0 ? 0:
         ((feedbackCounter.good * 100)/totalFeeds)
 
-    return(
-      <div>
-        <p>good {feedbackCounter.good}</p>
-        <p>neutral {feedbackCounter.neutral}</p>
-        <p>bad {feedbackCounter.bad}</p>
-        <p>all {totalFeeds}</p>
-        <p>average {averageScore}</p>
-        <p>positive {positiveScore} %</p>
-      </div>
-    )
+    if ( totalFeeds === 0 ){
+        return(
+            <p>No feedback given</p>
+        )
+    }
+    else if (totalFeeds >= 0) {
+        return(
+          <div>
+            <p>good {feedbackCounter.good}</p>
+            <p>neutral {feedbackCounter.neutral}</p>
+            <p>bad {feedbackCounter.bad}</p>
+            <p>all {totalFeeds}</p>
+            <p>average {averageScore}</p>
+            <p>positive {positiveScore} %</p>
+          </div>
+        )
+    }
 }
 
 function App() {
