@@ -12,7 +12,8 @@ const Button = ({onClick, text}) =>{
   )
 }
 
-const DisplayFeedbackCounters = ({feedbackCounter}) => {
+const Statistics = ({feedbackCounter}) => {
+
     const totalFeeds = feedbackCounter.good + feedbackCounter.neutral + feedbackCounter.bad
     // const averageScore = ((feedbackCounter.good - feedbackCounter.bad)/totalFeeds)
     // const positiveScore = ((feedbackCounter.good * 100)/totalFeeds)
@@ -50,7 +51,7 @@ function App() {
         <Button onClick={() => addFeedback('neutral')} text="neutral"/>
         <Button onClick={() => addFeedback('bad')} text="bad"/>
         <FeedbackTitles title="statistics"/>
-        <DisplayFeedbackCounters feedbackCounter={feedbackCounter} />
+        <Statistics feedbackCounter={feedbackCounter} />
       </div>
   )
 }
