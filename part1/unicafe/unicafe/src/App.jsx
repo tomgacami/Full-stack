@@ -13,28 +13,35 @@ const Button = ({onClick, text}) =>{
 }
 
 const DisplayFeedbackCounters = ({feedbackCounter}) => {
-  // console.log({feedbackCounter})
-  return(
+    const totalFeeds = feedbackCounter.good + feedbackCounter.neutral + feedbackCounter.bad
+    // const averageScore = ((feedbackCounter.good - feedbackCounter.bad)/totalFeeds)
+    // const positiveScore = ((feedbackCounter.good * 100)/totalFeeds)
+
+    const averageScore = totalFeeds === 0 ? 0:
+        ((feedbackCounter.good - feedbackCounter.bad)/totalFeeds)
+
+    const positiveScore = totalFeeds === 0 ? 0:
+        ((feedbackCounter.good * 100)/totalFeeds)
+
+    return(
       <div>
         <p>good {feedbackCounter.good}</p>
         <p>neutral {feedbackCounter.neutral}</p>
         <p>bad {feedbackCounter.bad}</p>
+        <p>all {totalFeeds}</p>
+        <p>average {averageScore}</p>
+        <p>positive {positiveScore} %</p>
       </div>
-  )
+    )
 }
-
-
 
 function App() {
 
-  const [feedbackCounter , setFeedback] = useState({good:0, neutral:0,bad:0})
+    const [feedbackCounter , setFeedback] = useState({good:0, neutral:0,bad:0})
 
-  const addFeedback = (calification) => {
-    // console.log(calification)
-    setFeedback(prev => ({...prev,[calification]: prev[calification] + 1 }))
-    // console.log('After: ',)
-  }
-
+    const addFeedback = (classification) => {
+        setFeedback(prev => ({...prev,[classification]: prev[classification] + 1 }))
+    }
 
   return (
       <div>
@@ -43,7 +50,7 @@ function App() {
         <Button onClick={() => addFeedback('neutral')} text="neutral"/>
         <Button onClick={() => addFeedback('bad')} text="bad"/>
         <FeedbackTitles title="statistics"/>
-        <DisplayFeedbackCounters feedbackCounter={feedbackCounter}/>
+        <DisplayFeedbackCounters feedbackCounter={feedbackCounter} />
       </div>
   )
 }
