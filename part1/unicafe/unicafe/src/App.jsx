@@ -37,7 +37,6 @@ const Statistics = ({feedbackCounter}) => {
     }
     else {
         return(
-          // <div>
             <table>
                 <tbody>
                 <StatisticLine text="good" value={feedbackCounter.good} />
@@ -48,7 +47,6 @@ const Statistics = ({feedbackCounter}) => {
                 <StatisticLine text="positive" value={positiveScore  + " %"}/>
                 </tbody>
             </table>
-          // </div>
         )
     }
 }
@@ -62,7 +60,6 @@ function App() {
     }
 
   return (
-      // <>
       <div>
         <FeedbackTitles title="give feedback"/>
         <Button onClick={() => addFeedback('good')} text="good"/>
@@ -71,19 +68,6 @@ function App() {
         <FeedbackTitles title="statistics"/>
         <Statistics feedbackCounter={feedbackCounter} />
       </div>
-        // {/*<tr>*/}
-      //   {/*  <td>Hola, soy tu primera celda.</td>*/}
-      //   {/*  <td>Soy tu segunda celda.</td>*/}
-      //   {/*  <td>Soy tu tercera celda.</td>*/}
-      //   {/*  <td>Soy tu cuarta celda.</td>*/}
-      //   {/*</tr>*/}
-      //   {/*  <tr>*/}
-      //   {/*      <td>segunda fila</td>*/}
-      //   {/*      <td>tercera fila</td>*/}
-      //   {/*      <td>cuarta fila</td>*/}
-      //
-      //   {/*  </tr>*/}
-      // {/*</>*/}
   )
 }
 
