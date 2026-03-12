@@ -12,11 +12,14 @@ const Button = ({onClick, text}) =>{
   )
 }
 
+const StatisticLine = ({text, value}) => {
+    return(
+        <p>{text} {value}</p>
+    )
+}
 const Statistics = ({feedbackCounter}) => {
 
     const totalFeeds = feedbackCounter.good + feedbackCounter.neutral + feedbackCounter.bad
-    // const averageScore = ((feedbackCounter.good - feedbackCounter.bad)/totalFeeds)
-    // const positiveScore = ((feedbackCounter.good * 100)/totalFeeds)
 
     const averageScore = totalFeeds === 0 ? 0:
         ((feedbackCounter.good - feedbackCounter.bad)/totalFeeds)
@@ -29,15 +32,15 @@ const Statistics = ({feedbackCounter}) => {
             <p>No feedback given</p>
         )
     }
-    else if (totalFeeds >= 0) {
+    else {
         return(
           <div>
-            <p>good {feedbackCounter.good}</p>
-            <p>neutral {feedbackCounter.neutral}</p>
-            <p>bad {feedbackCounter.bad}</p>
-            <p>all {totalFeeds}</p>
-            <p>average {averageScore}</p>
-            <p>positive {positiveScore} %</p>
+            <StatisticLine text="good" value={feedbackCounter.good} />
+            <StatisticLine text="neutral" value={feedbackCounter.neutral} />
+            <StatisticLine text="bad" value={feedbackCounter.bad} />
+            <StatisticLine text="all" value={totalFeeds} />
+            <StatisticLine text="average" value={averageScore} />
+            <StatisticLine text="positive" value={positiveScore  + " %"}/>
           </div>
         )
     }
