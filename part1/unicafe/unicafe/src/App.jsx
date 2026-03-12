@@ -14,7 +14,10 @@ const Button = ({onClick, text}) =>{
 
 const StatisticLine = ({text, value}) => {
     return(
-        <p>{text} {value}</p>
+            <tr>
+                <td>{text}</td>
+                <td>{value}</td>
+            </tr>
     )
 }
 const Statistics = ({feedbackCounter}) => {
@@ -34,14 +37,18 @@ const Statistics = ({feedbackCounter}) => {
     }
     else {
         return(
-          <div>
-            <StatisticLine text="good" value={feedbackCounter.good} />
-            <StatisticLine text="neutral" value={feedbackCounter.neutral} />
-            <StatisticLine text="bad" value={feedbackCounter.bad} />
-            <StatisticLine text="all" value={totalFeeds} />
-            <StatisticLine text="average" value={averageScore} />
-            <StatisticLine text="positive" value={positiveScore  + " %"}/>
-          </div>
+          // <div>
+            <table>
+                <tbody>
+                <StatisticLine text="good" value={feedbackCounter.good} />
+                <StatisticLine text="neutral" value={feedbackCounter.neutral} />
+                <StatisticLine text="bad" value={feedbackCounter.bad} />
+                <StatisticLine text="all" value={totalFeeds} />
+                <StatisticLine text="average" value={averageScore} />
+                <StatisticLine text="positive" value={positiveScore  + " %"}/>
+                </tbody>
+            </table>
+          // </div>
         )
     }
 }
@@ -55,6 +62,7 @@ function App() {
     }
 
   return (
+      // <>
       <div>
         <FeedbackTitles title="give feedback"/>
         <Button onClick={() => addFeedback('good')} text="good"/>
@@ -63,6 +71,19 @@ function App() {
         <FeedbackTitles title="statistics"/>
         <Statistics feedbackCounter={feedbackCounter} />
       </div>
+        // {/*<tr>*/}
+      //   {/*  <td>Hola, soy tu primera celda.</td>*/}
+      //   {/*  <td>Soy tu segunda celda.</td>*/}
+      //   {/*  <td>Soy tu tercera celda.</td>*/}
+      //   {/*  <td>Soy tu cuarta celda.</td>*/}
+      //   {/*</tr>*/}
+      //   {/*  <tr>*/}
+      //   {/*      <td>segunda fila</td>*/}
+      //   {/*      <td>tercera fila</td>*/}
+      //   {/*      <td>cuarta fila</td>*/}
+      //
+      //   {/*  </tr>*/}
+      // {/*</>*/}
   )
 }
 
