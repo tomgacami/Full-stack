@@ -37,7 +37,6 @@ dist-ssr
 /Conociendo/
 /public/
 part1/node_modules/
-part1/courseinfo/.vite
 part1/courseinfo/public/vite.svg
 /part1/courseinfo/node_modules
 /part1/unicafe/node_modules/
