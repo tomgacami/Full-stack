@@ -14,10 +14,10 @@ const Button = ({onClick, text}) =>{
 
 const StatisticLine = ({text, value}) => {
     return(
-            <tr>
-                <td>{text}</td>
-                <td>{value}</td>
-            </tr>
+        <tr>
+            <td>{text}</td>
+            <td>{value}</td>
+        </tr>
     )
 }
 const Statistics = ({feedbackCounter}) => {
@@ -35,20 +35,18 @@ const Statistics = ({feedbackCounter}) => {
             <p>No feedback given</p>
         )
     }
-    else {
-        return(
-            <table>
-                <tbody>
+    return(
+        <table>
+            <tbody>
                 <StatisticLine text="good" value={feedbackCounter.good} />
                 <StatisticLine text="neutral" value={feedbackCounter.neutral} />
                 <StatisticLine text="bad" value={feedbackCounter.bad} />
                 <StatisticLine text="all" value={totalFeeds} />
                 <StatisticLine text="average" value={averageScore} />
                 <StatisticLine text="positive" value={positiveScore  + " %"}/>
-                </tbody>
-            </table>
-        )
-    }
+            </tbody>
+        </table>
+    )
 }
 
 function App() {
