@@ -6,10 +6,41 @@ const Anecdote = ({anecdote}) => {
   )
 }
 
+const Title = ({title}) => {
+  return(
+      <h1>{title}</h1>
+  )
+}
+
 const Button = ({onClick, text}) => {
   return(
       <button onClick={onClick}>{text}</button>
   )
+}
+
+const AnecdoteMostVoted = ({votes, anecdotes}) => {
+
+  const mostVoted = Math.max(...votes)
+
+    if (mostVoted > 0){
+        let maxIndex = 0
+
+        for (let index= 0; index < votes.length; index++ ) {
+                if (votes[index] > votes[maxIndex]){
+                    maxIndex=index
+                }
+        }
+        return(
+            <div>
+                <Anecdote anecdote={anecdotes[maxIndex]}/>
+                <p>{"has " + mostVoted + " votes"}</p>
+            </div>
+        )
+    } else {
+        return (
+            <p>No votes yet</p>
+        )
+    }
 }
 
 function App() {
@@ -28,6 +59,8 @@ function App() {
 
   const [votes, setVote] = useState(Array(anecdotes.length).fill(0))
 
+  // const [mostVotes, setMostvoted] = useState(anecdotes.length)
+
   const setAnecdote = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length))
   }
@@ -40,9 +73,12 @@ function App() {
 
   return (
       <div>
+        <Title title="Anecdote of the day"/>
         <Anecdote anecdote={anecdotes[selected]}/>
         <Button onClick={setAnecdote} text="next anecdote"/>
         <Button onClick={()=>voteFor(selected)} text="vote" />
+        <Title title="Anecdote with most votes"/>
+        <AnecdoteMostVoted votes={votes} anecdotes={anecdotes}/>
       </div>
   )
 }
