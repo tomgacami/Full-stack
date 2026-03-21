@@ -20,25 +20,18 @@ const Button = ({onClick, text}) => {
 
 const AnecdoteMostVoted = ({votes, anecdotes}) => {
 
-  const mostVoted = Math.max(...votes)
+  const mostVoted = votes.indexOf(Math.max(...votes))
 
-    if (mostVoted > 0){
-        let maxIndex = 0
-
-        for (let index= 0; index < votes.length; index++ ) {
-                if (votes[index] > votes[maxIndex]){
-                    maxIndex=index
-                }
-        }
-        return(
-            <div>
-                <Anecdote anecdote={anecdotes[maxIndex]}/>
-                <p>{"has " + mostVoted + " votes"}</p>
-            </div>
-        )
-    } else {
+    if (votes[mostVoted] === 0){
         return (
             <p>No votes yet</p>
+        )
+    } else {
+        return(
+            <div>
+                <Anecdote anecdote={anecdotes[mostVoted]}/>
+                <p>{"has " + votes[mostVoted] + " votes"}</p>
+            </div>
         )
     }
 }
