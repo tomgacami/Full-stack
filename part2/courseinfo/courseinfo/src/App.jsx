@@ -3,15 +3,15 @@ const Course = ({course}) => {
     return (
         <div>
             <Header title={course.name}/>
-            <Content content={course.parts}/>
+            <Content parts={course.parts}/>
         </div>
     )
 }
 
-const Content = ({content}) => {
+const Content = ({parts}) => {
     return(
             <div>
-                {content.map(part =>
+                {parts.map(part =>
                     <Part key={part.id} part={part}/>
                 )}
             </div>
