@@ -33,23 +33,15 @@ const App = () => {
   }
 
   const handleNameAdd = (event) => {
-    // console.log('Name event: ', event.target.value)
       setNewName(event.target.value)
   }
 
   const handleNumberAdd = (event) => {
-      // console.log('Number event: ', event.target.value)
       setNewNumber(event.target.value)
   }
 
   const handleNameFilter = (event) => {
-      // console.log(event.target.value)
       setNameFilter(event.target.value)
-      // const nameFilterPerson = persons.filter(function(person) {
-      //     return person.name.toLowerCase().includes(nameFilter.toLowerCase()) || person.name.toUpperCase().includes(nameFilter.toUpperCase())
-      // })
-      // console.log('Nombre filtrado: ', nameFilter)
-      // console.log('Filter: ', nameFilterPerson)
   }
 
   const personsToShow = !nameFilter
@@ -84,20 +76,6 @@ const App = () => {
         </form>
 
         <Title title='Numbers'></Title>
-        {/*  <div>*/}
-        {/*      {persons.filter(person =>{*/}
-        {/*          if (!nameFilter) return true*/}
-        {/*          if (person.name.toLowerCase().includes(nameFilter.toLowerCase())*/}
-        {/*              // || person.name.toUpperCase().includes(nameFilter.toUpperCase())*/}
-        {/*          )*/}
-        {/*          {*/}
-        {/*              return true*/}
-        {/*          }*/}
-        {/*      })*/}
-        {/*          .map(person => (*/}
-        {/*          <Person key={person.key} person={person}/>*/}
-        {/*          ))}*/}
-        {/*</div>*/}
           <div>
               {personsToShow.map(person =>
                   <Person key={person.id} person={person}/>
