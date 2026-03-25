@@ -1,4 +1,11 @@
 import { useState } from 'react'
+import MainTitle from "./components/MainTitle.jsx";
+import Persons from "./components/PersonsSection.jsx";
+import FilterByName from "./components/FilterByPersonName.jsx";
+import PersonForm from "./components/PersonForm.jsx";
+
+
+
 
 const App = () => {
 
@@ -63,72 +70,6 @@ const App = () => {
 
         <Persons personsToShow={personsToShow}/>
       </div>
-  )
-}
-
-const PersonForm = ({newName,newNumber, onChangeName, onChangeNumber, onSubmit}) => {
-
-        return(
-            <div>
-                <LighterTitle title="add a new"/>
-                <form onSubmit={onSubmit}>
-                    <div>
-                        name: <input
-                        value={newName}
-                        onChange={onChangeName}
-                    />
-                    </div>
-                    <div>
-                        number: <input
-                        value={newNumber}
-                        onChange={onChangeNumber}
-                    />
-                    </div>
-                    <div>
-                        <button type="submit">add</button>
-                    </div>
-                </form>
-            </div>
-    )
-}
-
-const FilterByName = ({nameFilter, onChange }) => {
-
-    return (
-        <div>
-            filter show with <input value={nameFilter} onChange={onChange} />
-        </div>
-    )
-}
-
-const Persons = ({personsToShow}) => {
-
-    return(
-        <div>
-            <LighterTitle title='Numbers'></LighterTitle>
-            {personsToShow.map(person =>
-                <Person key={person.id} person={person}/>
-            )}
-        </div>
-    )
-}
-
-const Person = ({person}) =>{
-
-  return(
-      <div>{person.name} {person.number}</div>
-  )
-}
-
-const LighterTitle = ({title}) => {
-    return(
-        <h3>{title}</h3>
-    )
-}
-
-const MainTitle = ({title}) => {
-  return(
-      <h2>{title}</h2>
   )
 }
 
