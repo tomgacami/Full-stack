@@ -17,14 +17,17 @@ const App = () => {
 
     const addPerson = (event) => {
         event.preventDefault()
+
         const personObject = {
           name: newName,
           number:newNumber,
-            id: persons.length + 1
+            // id: persons.length + 1,
+            id: Math.max(...persons.map(person => person.id)) + 1
         }
 
         if (persons.some((person) => newName === person.name)) {
             alert(`${newName} is already added to phonebook`)
+            return
         }else{
             setPersons(persons.concat(personObject))
         }
@@ -49,41 +52,65 @@ const App = () => {
       :persons.filter(person =>
       person.name.toLowerCase().includes(nameFilter.toLowerCase())
       )
-
   return (
       <div>
-        <Title title='Phonebook'/>
-          <div>
-              filter show with <input value={nameFilter}
-                                      onChange={handleNameFilter}/>
-          </div>
-        <form onSubmit={addPerson}>
-          <div>
-            name: <input
-              value={newName}
-              onChange={handleNameAdd}
-          />
-          </div>
-          <div>
-              number: <input
-                value={newNumber}
-                onChange={handleNumberAdd}
-            />
-          </div>
-          <div>
-            <button type="submit">add</button>
-          </div>
-        </form>
+        <MainTitle title='Phonebook'/>
+        <FilterByName nameFilter={nameFilter} onChange={handleNameFilter} />
 
-        <Title title='Numbers'></Title>
-          <div>
-              {personsToShow.map(person =>
-                  <Person key={person.id} person={person}/>
-              )}
+        <PersonForm
+          newName={newName} newNumber={newNumber} onChangeName={handleNameAdd}
+          onChangeNumber={handleNumberAdd} onSubmit={addPerson}/>
 
-          </div>
+        <Persons personsToShow={personsToShow}/>
       </div>
   )
+}
+
+const PersonForm = ({newName,newNumber, onChangeName, onChangeNumber, onSubmit}) => {
+
+        return(
+            <div>
+                <LighterTitle title="add a new"/>
+                <form onSubmit={onSubmit}>
+                    <div>
+                        name: <input
+                        value={newName}
+                        onChange={onChangeName}
+                    />
+                    </div>
+                    <div>
+                        number: <input
+                        value={newNumber}
+                        onChange={onChangeNumber}
+                    />
+                    </div>
+                    <div>
+                        <button type="submit">add</button>
+                    </div>
+                </form>
+            </div>
+    )
+}
+
+const FilterByName = ({nameFilter, onChange }) => {
+
+    return (
+        <div>
+            filter show with <input value={nameFilter} onChange={onChange} />
+        </div>
+    )
+}
+
+const Persons = ({personsToShow}) => {
+
+    return(
+        <div>
+            <LighterTitle title='Numbers'></LighterTitle>
+            {personsToShow.map(person =>
+                <Person key={person.id} person={person}/>
+            )}
+        </div>
+    )
 }
 
 const Person = ({person}) =>{
@@ -93,8 +120,13 @@ const Person = ({person}) =>{
   )
 }
 
+const LighterTitle = ({title}) => {
+    return(
+        <h3>{title}</h3>
+    )
+}
 
-const Title = ({title}) => {
+const MainTitle = ({title}) => {
   return(
       <h2>{title}</h2>
   )
