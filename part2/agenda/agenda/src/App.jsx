@@ -5,24 +5,17 @@ import FilterByName from "./components/FilterByPersonName.jsx";
 import PersonForm from "./components/PersonForm.jsx";
 import axios from "axios";
 
-
-
-
 const App = () => {
 
   const [persons, setPersons] = useState([])
 
     useEffect(() => {
-        // console.log('Effect')
         axios
             .get('http://localhost:3001/persons')
             .then((res) => {
-                // console.log('Response: ', res)
                 setPersons(res.data)
             })
     }, [])
-
-    // console.log('Render', persons.length, 'persons')
 
 
   const [newName, setNewName] = useState('')
@@ -35,7 +28,6 @@ const App = () => {
         const personObject = {
           name: newName,
           number:newNumber,
-            // id: persons.length + 1,
             id: Math.max(...persons.map(person => person.id)) + 1
         }
 
@@ -43,7 +35,12 @@ const App = () => {
             alert(`${newName} is already added to phonebook`)
             return
         }else{
-            setPersons(persons.concat(personObject))
+            axios
+                .post('http://localhost:3001/persons', personObject)
+                .then (response => {
+                    setPersons(persons.concat(response.data))
+                })
+
         }
         setNewName('')
         setNewNumber('')
