@@ -57,6 +57,16 @@ const App = () => {
       setNameFilter(event.target.value)
   }
 
+  const deleteContact = (id, name) => {
+      const confirm = window.confirm(`Delete ${name} ?`)
+      if (confirm) {
+          personService.deleteContact(id)
+              .then(() => {
+                  setPersons(prev => prev.filter(person => person.id !== id))
+              })
+      }
+  }
+
   const personsToShow = !nameFilter
     ? persons
       :persons.filter(person =>
@@ -71,7 +81,7 @@ const App = () => {
           newName={newName} newNumber={newNumber} onChangeName={handleNameAdd}
           onChangeNumber={handleNumberAdd} onSubmit={addPerson}/>
 
-        <Persons personsToShow={personsToShow}/>
+        <Persons personsToShow={personsToShow} deleteContact={deleteContact} />
       </div>
   )
 }

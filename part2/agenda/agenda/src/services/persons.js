@@ -16,7 +16,14 @@ const create = newPerson => {
     return request.then(response => response.data)
 }
 
+const deleteContact = (id) => {
+
+    const contactUrl = baseUrl + '/' + id
+    return axios
+        .delete(contactUrl)
+}
+
 
 export default {
-    getAll, create
+    getAll, create, deleteContact
 }
