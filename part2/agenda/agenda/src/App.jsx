@@ -27,7 +27,7 @@ const App = () => {
         const personObject = {
           name: newName,
           number:newNumber,
-            id: Math.max(...persons.map(person => person.id)) + 1
+            // id: Math.max(...persons.map(person => person.id)) + 1
         }
 
         if (persons.some((person) => newName === person.name)) {
@@ -38,24 +38,32 @@ const App = () => {
                 alert(`${newName} is already added to phonebook`)
                 return
 
-            } else if (pep.number !== personObject.number) {
-                const confirm = window.confirm(`${pep.name} is already added to phonebook, remplace the old number with a new one?`)
-                if (confirm) {
+            } else {
+                const confirmUpdate = window.confirm(`${pep.name} is already added to phonebook, replace the old number with a new one?`)
+                if (confirmUpdate) {
                     const changedContact = {...pep, number: newNumber}
                     personService
                         .updateContact(pep.id, changedContact)
                         .then( returnedContact =>{
                             setPersons(persons.map(person => person.name !== pep.name ? person : returnedContact ))
                         })
+                        .catch( error => {
+                            alert(
+                                'An error occurred updating contact'
+                            )
+                        })
                 }
             }
-
-
         }else{
             personService
                 .create(personObject)
                 .then (response => {
                     setPersons(persons.concat(response))
+                })
+                .catch(error => {
+                    alert(
+                        'An error occurred creating contact'
+                    )
                 })
 
         }
@@ -81,6 +89,11 @@ const App = () => {
           personService.deleteContact(id)
               .then(() => {
                   setPersons(prev => prev.filter(person => person.id !== id))
+              })
+              .catch(error => {
+                  alert(
+                      'An error occurred deleting contact'
+                  )
               })
       }
   }

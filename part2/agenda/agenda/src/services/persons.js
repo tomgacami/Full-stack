@@ -19,14 +19,16 @@ const create = newPerson => {
 const deleteContact = (id) => {
 
     const contactUrl = baseUrl + '/' + id
-    return axios
-        .delete(contactUrl)
-}
-
-const updateContact = (id, newNumber) => {
     const request =
         axios
-            .put(`${baseUrl}/${id}`, newNumber)
+        .delete(contactUrl)
+    return request.then(response => response.data)
+}
+
+const updateContact = (id, updatedContaact) => {
+    const request =
+        axios
+            .put(`${baseUrl}/${id}`, updatedContaact)
     return request.then(response => response.data)
 }
 
