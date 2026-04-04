@@ -5,7 +5,6 @@ import FilterByName from "./components/FilterByPersonName.jsx";
 import PersonForm from "./components/PersonForm.jsx";
 import personService from './services/persons.js'
 import Notification from "./components/Notification.jsx";
-import person from "./components/Person.jsx";
 
 const App = () => {
 
@@ -13,7 +12,7 @@ const App = () => {
     const [newName, setNewName] = useState('')
     const [newNumber , setNewNumber] = useState('')
     const [nameFilter, setNameFilter] = useState('')
-        const [message, setMessage] = useState(null)
+    const [notification, setNotification] = useState(null)
 
     useEffect(() => {
         personService
@@ -23,6 +22,12 @@ const App = () => {
             })
     }, [])
 
+    const displayNotification = (message, type) =>{
+      setNotification({message, type})
+        setTimeout(() =>{
+            setNotification(null)
+        },5000)
+    }
 
     const addPerson = (event) => {
         event.preventDefault()
@@ -48,17 +53,12 @@ const App = () => {
                         .updateContact(pep.id, changedContact)
                         .then( returnedContact =>{
                             setPersons(persons.map(person => person.name !== pep.name ? person : returnedContact ))
-                            setMessage(`${pep.name} updated successfully`)
-                            setTimeout(()=>{
-                                setMessage(null)
-                            }, 5000)
+                            displayNotification(`${pep.name} updated successfully`,'success')
                             setNewName('')
                             setNewNumber('')
                         })
                         .catch( error => {
-                            alert(
-                                'An error occurred updating contact'
-                            )
+                            displayNotification(`Information of ${pep.name} has already been removed from server`,'error')
                         })
                 }
             }
@@ -67,10 +67,7 @@ const App = () => {
                 .create(personObject)
                 .then (response => {
                     setPersons(persons.concat(response))
-                    setMessage(`Added ${personObject.name}`)
-                    setTimeout(() => {
-                        setMessage(null)
-                    }, 5000)
+                    displayNotification(`Added ${personObject.name}`,'success')
                     setNewName('')
                     setNewNumber('')
                 })
@@ -118,7 +115,7 @@ const App = () => {
   return (
       <div>
         <MainTitle title='Phonebook'/>
-          <Notification message={message}/>
+          <Notification notification={notification} />
         <FilterByName nameFilter={nameFilter} onChange={handleNameFilter} />
 
         <PersonForm
