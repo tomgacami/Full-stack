@@ -25,10 +25,10 @@ const deleteContact = (id) => {
     return request.then(response => response.data)
 }
 
-const updateContact = (id, updatedContaact) => {
+const updateContact = (id, updatedContact) => {
     const request =
         axios
-            .put(`${baseUrl}/${id}`, updatedContaact)
+            .put(`${baseUrl}/${id}`, updatedContact)
     return request.then(response => response.data)
 }
 

@@ -27,7 +27,6 @@ const App = () => {
         const personObject = {
           name: newName,
           number:newNumber,
-            // id: Math.max(...persons.map(person => person.id)) + 1
         }
 
         if (persons.some((person) => newName === person.name)) {
@@ -46,6 +45,8 @@ const App = () => {
                         .updateContact(pep.id, changedContact)
                         .then( returnedContact =>{
                             setPersons(persons.map(person => person.name !== pep.name ? person : returnedContact ))
+                            setNewName('')
+                            setNewNumber('')
                         })
                         .catch( error => {
                             alert(
@@ -59,6 +60,8 @@ const App = () => {
                 .create(personObject)
                 .then (response => {
                     setPersons(persons.concat(response))
+                    setNewName('')
+                    setNewNumber('')
                 })
                 .catch(error => {
                     alert(
@@ -67,8 +70,6 @@ const App = () => {
                 })
 
         }
-        setNewName('')
-        setNewNumber('')
   }
 
   const handleNameAdd = (event) => {
