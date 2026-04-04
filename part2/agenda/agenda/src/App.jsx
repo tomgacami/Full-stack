@@ -4,7 +4,6 @@ import Persons from "./components/PersonsSection.jsx";
 import FilterByName from "./components/FilterByPersonName.jsx";
 import PersonForm from "./components/PersonForm.jsx";
 import personService from './services/persons.js'
-import person from "./components/Person.jsx";
 
 const App = () => {
 
@@ -34,30 +33,22 @@ const App = () => {
         if (persons.some((person) => newName === person.name)) {
 
             const pep = persons.find(person => person.name === personObject.name)
-            console.log('Person object: ', personObject.name, personObject.number)
-            console.log('Pep : ', {pep})
 
             if (pep.number === personObject.number) {
                 alert(`${newName} is already added to phonebook`)
                 return
 
             } else if (pep.number !== personObject.number) {
-                console.log('Entro en el if')
                 const confirm = window.confirm(`${pep.name} is already added to phonebook, remplace the old number with a new one?`)
-                console.log(confirm)
                 if (confirm) {
-                    console.log('Entro en el confirm')
                     const changedContact = {...pep, number: newNumber}
                     personService
                         .updateContact(pep.id, changedContact)
                         .then( returnedContact =>{
                             setPersons(persons.map(person => person.name !== pep.name ? person : returnedContact ))
-                            // setPersons(personService.getAll)
-                            console.log(persons)
                         })
                 }
             }
-            console.log('Salio del if')
 
 
         }else{
