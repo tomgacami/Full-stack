@@ -1,9 +1,12 @@
 
-const Country  = ({countryData}) => {
+const Country  = ({countryData, cityWeather}) => {
 
-    if (!countryData){
-        return null
+    if (!countryData || !cityWeather) {
+        // return null
+        return <div>Loading weather...</div>
     }
+
+    const iconUrlWeather = `https://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@2x.png`
 
     return (
         <div>
@@ -18,9 +21,11 @@ const Country  = ({countryData}) => {
                 ))}
             </ul>
             <img src={countryData.flags.png} alt={countryData.flags.alt}/>
+            <h2>Weather in {countryData.capital[0]}</h2>
+            <p>Temprature {(cityWeather.main.temp - 273.15).toFixed(2)} Celsius</p>
+            <img src={iconUrlWeather} alt="weather icon"/>
+            <p>Wind {cityWeather.wind.speed} m/s</p>
         </div>
-
-
     )
 }
 export default Country

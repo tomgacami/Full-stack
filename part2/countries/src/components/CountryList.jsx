@@ -1,6 +1,6 @@
 import Country from "./Country.jsx";
 
-const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry}) => {
+const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry, cityWeather}) => {
 
     if (!inputCountry){
         return null
@@ -20,7 +20,7 @@ const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry}) => 
         )
     } else {
         return (
-            <Country countryData={countriesToDisplay[0]}/>
+            <Country countryData={countriesToDisplay[0]} cityWeather={cityWeather}/>
         )
     }
 }
