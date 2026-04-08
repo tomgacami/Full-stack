@@ -1,10 +1,10 @@
 
-const CountryForm = ({countryName, onChange}) =>{
+const CountryForm = ({inputCountry, onChange}) =>{
 
     return(
         <div>
             find countries <input
-            value={countryName}
+            value={inputCountry}
             onChange={onChange}/>
         </div>
     )

@@ -1,6 +1,5 @@
-import Country from "./Country.jsx";
 
-const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry, cityWeather}) => {
+const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry}) => {
 
     if (!inputCountry){
         return null
@@ -17,10 +16,6 @@ const CountryList = ({countriesToDisplay, inputCountry, setSelectedCountry, city
                 <button onClick={() => setSelectedCountry(country)}>Show</button>
             </div>
             )
-        )
-    } else {
-        return (
-            <Country countryData={countriesToDisplay[0]} cityWeather={cityWeather}/>
         )
     }
 }

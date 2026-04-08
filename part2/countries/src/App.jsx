@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import CountryForm from '../src/components/CountryForm.jsx'
+import CountryForm from "./components/CountryForm.jsx";
 import CountryList from "./components/CountryList.jsx";
 import Country from "./components/Country.jsx";
 import countryServices from './services/countries.js'
@@ -17,11 +17,20 @@ function App() {
       setSelectedCountry(null)
   }
 
-  useEffect(() => {
+    const countriesToDisplay =!inputCountry
+        ? countriesList
+        : countriesList.filter(country =>
+            country.name.common.toLowerCase().includes(inputCountry.toLowerCase())
+        )
 
-      if (selectedCountry ) {
-          const lat = selectedCountry.capitalInfo.latlng.toString().split(",")[0]
-          const lon = selectedCountry.capitalInfo.latlng.toString().split(",")[1]
+    const autoSelectedCountry = countriesToDisplay.length === 1 ? countriesToDisplay[0] : selectedCountry
+
+
+    useEffect(() => {
+
+      if (autoSelectedCountry ) {
+          const lat = autoSelectedCountry.capitalInfo.latlng.toString().split(",")[0]
+          const lon = autoSelectedCountry.capitalInfo.latlng.toString().split(",")[1]
 
           weatherServices
               .getCityWeather(lat, lon)
@@ -29,7 +38,7 @@ function App() {
                   setCityWeather(response)
               })
         }
-  }, [selectedCountry])
+  }, [autoSelectedCountry])
 
   useEffect(() =>{
     countryServices
@@ -40,20 +49,14 @@ function App() {
 
   }, [])
 
-  const countriesToDisplay =!inputCountry
-  ? countriesList
-      : countriesList.filter(country =>
-          country.name.common.toLowerCase().includes(inputCountry.toLowerCase())
-      )
-
-  return (
+    return (
     <>
       <CountryForm
           inputCountry={inputCountry}
           onChange={handleCountryChange}/>
       <CountryList countriesToDisplay={countriesToDisplay} inputCountry={inputCountry}
                    setSelectedCountry={setSelectedCountry} cityWeather={cityWeather}/>
-        {selectedCountry && <Country countryData={selectedCountry} cityWeather={cityWeather} />}
+        {autoSelectedCountry && <Country countryData={autoSelectedCountry} cityWeather={cityWeather} />}
     </>
   )
 }
