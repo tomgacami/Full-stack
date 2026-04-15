@@ -45,6 +45,9 @@ part1/courseinfo/public/vite.svg
 /part2/agenda/agenda/node_modules/
 /part2/countries/node_modules
 /Conociendo-Backend/
-/part3/phonebook-backend/.idea
+/Conociendo-Backend/.idea
+/Conociendo-Backend/.idea/
+/part3/phonebook-backend/.idea/
+/part3/phonebook-backend/node_modules
 /part3/phonebook-backend/node_modules/
 /.run
