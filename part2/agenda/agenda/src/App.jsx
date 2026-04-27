@@ -72,9 +72,12 @@ const App = () => {
                     setNewNumber('')
                 })
                 .catch(error => {
-                    alert(
-                        'An error occurred creating contact'
-                    )
+                    // console.log(error.response.data.error)
+                    displayNotification(error.response.data.error, 'error')
+
+                    // alert(
+                    //     'An error occurred creating contact'
+                    // )
                 })
 
         }
